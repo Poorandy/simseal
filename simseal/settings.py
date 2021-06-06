@@ -11,9 +11,13 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
+import sys
+# 设置apps路径
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
+
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,18 +29,24 @@ SECRET_KEY = 'v)s6*1$2-wla9+u(2*5$b=8q$5m6$_-&r8*dtglrgm0_ev9ww8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'simpleui',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'import_export',
+    'apps.core',
+    'apps.plat',
+    'apps.simc'
 ]
 
 MIDDLEWARE = [
@@ -118,3 +128,62 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+if DEBUG:
+    STATICFILES_DIRS = [str(BASE_DIR / 'static'), ]
+else:
+    STATIC_ROOT = str(BASE_DIR / 'static')
+
+
+STATIC_ROOT = '/static/'
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (os.path.join('static'), )
+
+# simleui configs
+SIMPLEUI_CONFIG = {
+    'system_keep': False,
+    # 'menu_display': ['指标刷新工具', '测试', '权限认证', '动态菜单测试'],      # 开启排序和过滤功能, 不填此字段为默认排序和全部显示, 空列表[] 为全部不显示.
+    'dynamic': True,  # 设置是否开启动态菜单, 默认为False. 如果开启, 则会在每次用户登陆时动态展示菜单内容
+    'menus': [{
+        'name': 'QUICK SIM',
+        'icon': 'fab fa-simplybuilt',
+        'url': '/'
+    }, {
+        'app': 'auth',
+        'name': 'AUTH',
+        'icon': 'fas fa-user-shield',
+        'models': [{
+            'name': 'USER',
+            'icon': 'fa fa-user',
+            'url': 'auth/user/'
+        },
+            {
+            'name': 'GROUP',
+            'icon': 'fa fa-users',
+            'url': 'auth/group'
+        }]
+    }, {
+        # 'app': 'apps.',
+        'name': 'SETTINGS',
+        'icon': 'fa fa-cogs',
+        'models': [{
+            'name': 'MONSTERS',
+            'icon': "fas fa-pastafarianism",
+            # 'url': 'apps/simc/inxregularprogram/'
+            'url': 'simc/monster/'
+        }]
+
+    }]
+}
+
+SIMPLEUI_HOME_INFO = False
+
+SIMPLEUI_LOGO = 'https://miro.com/api/v1/accounts/3074457358670303205/picture?etag=R3074457346012449852_1&size=140'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}

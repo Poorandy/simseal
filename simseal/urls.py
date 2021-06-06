@@ -16,6 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+
+admin.site.site_title = f'PROJECT SEAL SIMULAION PLATFORM'
+admin.site.site_header = f'SIMSEAL'
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
