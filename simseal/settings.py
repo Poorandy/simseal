@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'apps.core',
     'apps.plat',
     'apps.simc',
-    'corsheader',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
