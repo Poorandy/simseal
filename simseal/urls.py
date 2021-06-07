@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url
+from django.views.generic import RedirectView
 
 
 admin.site.site_title = f'PROJECT SEAL SIMULAION PLATFORM'
@@ -23,4 +25,6 @@ admin.site.site_header = f'SIMSEAL'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(r'^favicon\.ico$', RedirectView.as_view(
+        url='/static/images/favicon.ico')),
 ]
