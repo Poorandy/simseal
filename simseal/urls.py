@@ -18,13 +18,16 @@ from django.urls import path
 from django.conf.urls import url
 from django.views.generic import RedirectView
 
-
+from apps.simc.views import CharacterView, CardView, MonsterView
 admin.site.site_title = f'PROJECT SEAL SIMULAION PLATFORM'
 admin.site.site_header = f'SIMSEAL'
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/character/', CharacterView.as_view()),
+    path('api/card/', CardView.as_view()),
+    path('api/monster/', MonsterView.as_view()),
     url(r'^favicon\.ico$', RedirectView.as_view(
         url='/static/images/favicon.ico')),
 ]
