@@ -48,7 +48,7 @@ player = '贝尔托'  power -= 1
 target = ['哥布林']
 
 
-feedback 接受 behave > '@dirDamage(5)' | 'target'
+feedback 接受 behave > '@dirDamage(5)' | 'target' | 'player'
 
 for i in range(5)
 
