@@ -201,6 +201,15 @@ SIMPLEUI_CONFIG = {
             'icon': "fas fa-pastafarianism",
             # 'url': 'apps/simc/inxregularprogram/'
             'url': 'simc/monster/'
+        }, {
+            'name': 'CARDS',
+            'icon': "fab fa-superpowers",
+            # 'url': 'apps/simc/inxregularprogram/'
+            'url': 'simc/card/'
+        },{
+            'name': 'CHARACTER',
+            'icon': 'fas fa-grimace',
+            'url': 'simc/character/'
         }]
 
     }]
@@ -209,7 +218,6 @@ SIMPLEUI_CONFIG = {
 SIMPLEUI_HOME_INFO = False
 
 SIMPLEUI_LOGO = 'https://miro.com/api/v1/accounts/3074457358670303205/picture?etag=R3074457346012449852_1&size=140'
-
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
