@@ -14,6 +14,8 @@ class Monster(models.Model):
     summary = models.TextField(verbose_name="单位描述")
     health = models.IntegerField(verbose_name="血量")
     sync = models.IntegerField(verbose_name="同步值")
+    img = models.ImageField(
+        verbose_name='封面', upload_to='img/monster/%Y/%m/%d/', null=True)
     # "@absDamage(5)|@consDamage(2,4)|absHeal(5)"
     behavior = models.TextField(verbose_name="单位行为")
     unit_flag = models.IntegerField(verbose_name="单位标记", default=0)
@@ -59,6 +61,13 @@ class Card(models.Model):
     name = models.CharField(verbose_name="卡牌名", max_length=30)
     summary = models.TextField(verbose_name="卡牌描述")
     type = models.CharField(verbose_name="卡牌类型", default="Unit", max_length=16)
+    power = models.IntegerField(verbose_name="费用", default=1)
+    material = models.CharField(
+        verbose_name="施法材料", default='undefined', max_length=25)
+    waiver = models.TextField(
+        verbose_name="豁免判定", default='undefined')
+    img = models.ImageField(
+        verbose_name='封面', upload_to='img/card/%Y/%m/%d/', null=True)
     behavior = models.TextField(verbose_name="单位行为")
     update_time = models.DateTimeField(
         verbose_name="更新时间", auto_now=True)
@@ -78,6 +87,8 @@ class Character(models.Model):
     summary = models.TextField(verbose_name="角色描述")
     health = models.IntegerField(verbose_name="血量")
     sync = models.IntegerField(verbose_name="同步值")
+    img = models.ImageField(
+        verbose_name='封面', upload_to='img/character/%Y/%m/%d/', null=True)
     # "@absDamage(5)|@consDamage(2,4)|absHeal(5)"
     behavior = models.TextField(verbose_name="单位行为")
     update_time = models.DateTimeField(

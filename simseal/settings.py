@@ -167,6 +167,10 @@ STATIC_ROOT = '/static/'
 
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+MEDIA_URL = '/media/'
+
 STATICFILES_DIRS = (os.path.join('static'), )
 
 # simleui configs
@@ -206,7 +210,7 @@ SIMPLEUI_CONFIG = {
             'icon': "fab fa-superpowers",
             # 'url': 'apps/simc/inxregularprogram/'
             'url': 'simc/card/'
-        },{
+        }, {
             'name': 'CHARACTER',
             'icon': 'fas fa-grimace',
             'url': 'simc/character/'

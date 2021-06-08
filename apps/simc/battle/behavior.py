@@ -6,8 +6,10 @@ from apps.simc.data.unit import MainUnit
 
 class Behavior:
 
-    def __init__(self) -> None:
-        self.target = MainUnit()
+    def __init__(self, behave, target, sender) -> None:
+        self.target = MainUnit(target)
+        self.player = MainUnit(sender)
+        self.behave = behave
         pass
 
     def dirDamage(self, damage, range):
@@ -31,9 +33,11 @@ class Behavior:
 
 class FeedBack:
 
-    def __init__(self) -> None:
-        self.player = MainUnit()
+    def __init__(self, behave, receiver, source) -> None:
+        self.receiver = MainUnit(receiver)
+        self.source = MainUnit(source)
+        self.behave = behave
         pass
 
     def feedback(self):
-        self.target.cur_health -= damage
+        self.receiver.cur_health -= damage
