@@ -26,8 +26,8 @@ class MonsterAdmin(ExportActionModelAdmin, AjaxAdmin):
     search_fields = ('name', 'unit_flag',)
     list_filter = ('name',)
     date_hierarchy = 'update_time'
-    list_display = ('id', 'name', 'summary',
-                    'behavior', 'behavior_script', 'health', 'sync', 'editor', 'update_time')
+    list_display = ('id', 'name',
+                    'behavior_script', 'health', 'sync', 'editor', 'update_time')
     ordering = ['name']
     list_per_page = 100
     # actions = ['make_copy', ]
@@ -75,8 +75,8 @@ class CardAdmin(ExportActionModelAdmin, AjaxAdmin):
     search_fields = ('name', 'type',)
     list_filter = ('name',)
     date_hierarchy = 'update_time'
-    list_display = ('id', 'name', 'summary',
-                    'behavior', 'behavior_script', 'editor', 'update_time')
+    list_display = ('id', 'name',
+                    'behavior_script', 'editor', 'update_time')
     ordering = ['name']
     list_per_page = 100
 
@@ -125,8 +125,8 @@ class CharacterAdmin(ExportActionModelAdmin, AjaxAdmin):
     search_fields = ('name',)
     list_filter = ('name',)
     date_hierarchy = 'update_time'
-    list_display = ('id', 'name', 'summary',
-                    'behavior', 'behavior_script', 'health', 'sync', 'editor', 'update_time')
+    list_display = ('id', 'name',
+                    'behavior_script', 'health', 'sync', 'editor', 'update_time')
     ordering = ['name']
     list_per_page = 100
 
