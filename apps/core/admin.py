@@ -2,7 +2,7 @@ import uuid
 from django.contrib import admin, messages
 from apps.simc.models import Monster, Card, Character, BattleField
 from import_export import resources
-from import_export.admin import ImportExportActionModelAdmin
+from import_export.admin import ImportExportActionModelAdmin, ExportActionModelAdmin
 from simpleui.admin import AjaxAdmin
 
 from datetime import datetime
@@ -21,7 +21,7 @@ class MonsterResource(resources.ModelResource):
 
 
 @admin.register(Monster)
-class MonsterAdmin(ImportExportActionModelAdmin, AjaxAdmin):
+class MonsterAdmin(ExportActionModelAdmin, AjaxAdmin):
     resource_class = MonsterResource
     search_fields = ('name', 'unit_flag',)
     list_filter = ('name',)
@@ -30,13 +30,12 @@ class MonsterAdmin(ImportExportActionModelAdmin, AjaxAdmin):
                     'behavior', 'health', 'sync', 'update_time')
     ordering = ['name']
     list_per_page = 100
-
-    # actions = ['make_copy', 'link_module', 'run_index']
-    actions = ['make_copy', ]
+    # actions = ['make_copy', ]
 
     def message_success(self, request, queryset, context):
         messages.add_message(request, messages.SUCCESS, context)
 
+    # @admin.action(description='COPY')
     def make_copy(self, request, queryset):
         post = request.POST
         if not post.get('_selected_action'):
@@ -71,7 +70,7 @@ class CardResource(resources.ModelResource):
 
 
 @admin.register(Card)
-class CardAdmin(ImportExportActionModelAdmin, AjaxAdmin):
+class CardAdmin(ExportActionModelAdmin, AjaxAdmin):
     resource_class = CardResource
     search_fields = ('name', 'type',)
     list_filter = ('name',)
@@ -82,7 +81,7 @@ class CardAdmin(ImportExportActionModelAdmin, AjaxAdmin):
     list_per_page = 100
 
     # actions = ['make_copy', 'link_module', 'run_index']
-    actions = ['make_copy', ]
+    # actions = ['make_copy', ]
 
     def message_success(self, request, queryset, context):
         messages.add_message(request, messages.SUCCESS, context)
@@ -121,7 +120,7 @@ class CharacterResource(resources.ModelResource):
 
 
 @admin.register(Character)
-class CharacterAdmin(ImportExportActionModelAdmin, AjaxAdmin):
+class CharacterAdmin(ExportActionModelAdmin, AjaxAdmin):
     resource_class = CharacterResource
     search_fields = ('name',)
     list_filter = ('name',)
@@ -132,7 +131,7 @@ class CharacterAdmin(ImportExportActionModelAdmin, AjaxAdmin):
     list_per_page = 100
 
     # actions = ['make_copy', 'link_module', 'run_index']
-    actions = ['make_copy', ]
+    # actions = ['make_copy', ]
 
     def message_success(self, request, queryset, context):
         messages.add_message(request, messages.SUCCESS, context)
