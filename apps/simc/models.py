@@ -18,7 +18,9 @@ class Monster(models.Model):
         verbose_name='封面', upload_to='img/monster/%Y/%m/%d/', null=True)
     # "@absDamage(5)|@consDamage(2,4)|absHeal(5)"
     behavior = models.TextField(verbose_name="单位行为")
+    behavior_script = models.TextField(verbose_name="单位行为代码", null=True)
     unit_flag = models.IntegerField(verbose_name="单位标记", default=0)
+    editor = models.CharField(verbose_name='编辑人', max_length=25, null=True)
     update_time = models.DateTimeField(
         verbose_name="更新时间", auto_now=True)
     create_time = models.DateTimeField(
@@ -45,6 +47,7 @@ class BattleField(models.Model):
     user_id = models.ForeignKey(
         User, on_delete=models.CASCADE, verbose_name="账号ID")
     combat_log = models.TextField(verbose_name="战斗日志")
+    editor = models.CharField(verbose_name='编辑人', max_length=25, null=True)
     update_time = models.DateTimeField(
         verbose_name="更新时间", auto_now=True)
     create_time = models.DateTimeField(
@@ -69,6 +72,8 @@ class Card(models.Model):
     img = models.ImageField(
         verbose_name='封面', upload_to='img/card/%Y/%m/%d/', null=True)
     behavior = models.TextField(verbose_name="单位行为")
+    behavior_script = models.TextField(verbose_name="单位行为代码", null=True)
+    editor = models.CharField(verbose_name='编辑人', max_length=25, null=True)
     update_time = models.DateTimeField(
         verbose_name="更新时间", auto_now=True)
     create_time = models.DateTimeField(
@@ -91,6 +96,8 @@ class Character(models.Model):
         verbose_name='封面', upload_to='img/character/%Y/%m/%d/', null=True)
     # "@absDamage(5)|@consDamage(2,4)|absHeal(5)"
     behavior = models.TextField(verbose_name="单位行为")
+    behavior_script = models.TextField(verbose_name="单位行为代码", null=True)
+    editor = models.CharField(verbose_name='编辑人', max_length=25, null=True)
     update_time = models.DateTimeField(
         verbose_name="更新时间", auto_now=True)
     create_time = models.DateTimeField(
