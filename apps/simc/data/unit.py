@@ -4,13 +4,13 @@
 class MainUnit:
 
     def __init__(self, unit) -> None:
-        self.cur_health = 100,
-        self.cur_sync = 100,
-        self.name = unit.get('name'),
-        self.max_health = 100,
-        self.max_sync = 100,
-        self.cur_power = 5,
-        self.max_power = 5,
+        self.cur_health = 100
+        self.cur_sync = 100
+        self.name = unit.get('name')
+        self.max_health = 100
+        self.max_sync = 100
+        self.cur_power = 5
+        self.max_power = 5
         self.buff = [{
             'type': 'debuff',
             'id': '灼烧id',
@@ -26,3 +26,6 @@ class MainUnit:
         }]
 
         pass
+
+    def __str__(self):
+        return self.name
