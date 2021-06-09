@@ -40,16 +40,3 @@ run_number = 100
 # 身上有DOT，不对他使用卡牌
 # buff类卡牌，优先使用
 
-
-# flow
-behavior 发起 behave > '@dirDamage(5)' | 'target' | 'player'
-
-player = '贝尔托'  power -= 1
-target = ['哥布林']
-
-
-feedback 接受 behave > '@dirDamage(5)' | 'target' | 'player'
-
-for i in range(5)
-
-target = '哥布林' hp -= 5
