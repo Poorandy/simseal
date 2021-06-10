@@ -6,6 +6,7 @@ p1 = re.compile(r'[(](.*?)[)]', re.S)
 p2 = re.compile(r'[>](.*?)[@]', re.S)
 p3 = re.compile(r'[@](.*?)[(]', re.S)
 
+
 def preprocess(behave):
     """behave前处理
     >0@susDamage(2)#1||>4@selfHeal(2)#-1||>0@dirDamage(1)#-1
@@ -13,7 +14,7 @@ def preprocess(behave):
     #：behave level 优先级定义符
        -1 : 被动
        0-99 : less and faster
-    >: 目标类型
+    >: behave target 目标类型定义符
        0:敌对非死亡单位
        1:敌对所有单位
        2:友方非死亡单位

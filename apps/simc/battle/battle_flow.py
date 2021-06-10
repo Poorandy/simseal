@@ -79,7 +79,6 @@ class BattleFlow:
         return self.game_over
 
     def get_target(self, behave, sender):
-
         res = preprocess(behave)[0]
         target_flag = res.get('target')
         if not target_flag:  # 敌方所有存活单位
