@@ -121,5 +121,5 @@ class EventExecutor:
 
 if __name__ == '__main__':
     event_executor = EventExecutor(context='@dirDamage(1)#1||@selfHeal(2)#-1',
-                                     target={'name': '怪物'}, sender={'name': '勇士'}, power=1)
+                                   target={'name': '怪物'}, sender={'name': '勇士'}, power=1)
     event_executor.execute()

@@ -26,6 +26,22 @@ class MainUnit:
             'level': 2
         }]
         self.behavior = unit.get('behavior')
+        self.enemy = unit.get('enemy')
+
+        pass
+
+    def __str__(self):
+        return self.name
+
+
+class CardUnit:
+
+    def __init__(self, unit):
+        self.id = unit.get('id')
+        self.name = unit.get('name')
+        self.behavior = unit.get('behavior')
+        self.power = unit.get('power')
+        self.type = unit.get('type')
 
         pass
 
