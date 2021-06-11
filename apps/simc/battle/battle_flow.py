@@ -12,7 +12,7 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'simseal.settings'
 django.setup()
 
 from apps.simc.data.unit import MainUnit, CardUnit
-from apps.simc.battle.behavior import EventExecutor
+from apps.simc.battle.event import EventExecutor
 from apps.simc.battle.preprocess import preprocess
 
 
