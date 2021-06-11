@@ -1,4 +1,5 @@
 # define unit
+from apps.simc.battle.preprocess import preprocess
 
 
 class MainUnit:
@@ -12,26 +13,20 @@ class MainUnit:
         self.max_sync = unit.get('max_sync')
         self.cur_power = unit.get('max_power')
         self.max_power = unit.get('max_power')
-        self.buff = [{
-            'type': 'debuff',
-            'id': '灼烧id',
-            'behavior': '@selfDamage(2)',
-            'time': 2,
-            'level': 3
-        }, {
-            'type': 'debuff',
-            'id': '晕眩id',
-            'behavior': '@stunned(2)',
-            'time': 1,
-            'level': 2
-        }]
         self.behavior = unit.get('behavior')
+        self.buffs, self.debuffs = self.generate_buffs()
         self.enemy = unit.get('enemy')
 
         pass
 
     def __str__(self):
         return self.name
+
+    def generate_buffs(self):
+        behaves = list(filter(lambda elem: elem.get('level')[0] == -2, preprocess(self.behavior)))
+
+        return "buffs", "debuffs"
+        pass
 
 
 class CardUnit:
@@ -47,3 +42,16 @@ class CardUnit:
 
     def __str__(self):
         return self.name
+
+
+if __name__ == '__main__':
+    unit = MainUnit({
+        'id': 'm3',
+        'name': '精英牛头人',
+        'behavior': '>4@selfHeal(2)#-1||>0@dirDamage(5)#1||>0@incDamage(1)#-2',
+        'max_health': 200,
+        'max_sync': 100,
+        'max_power': 5,
+        'enemy': True
+    })
+    print(unit.buffs)

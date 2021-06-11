@@ -12,7 +12,8 @@ def preprocess(behave):
     >0@susDamage(2)#1||>4@selfHeal(2)#-1||>0@dirDamage(1)#-1
     @: behave func 方法定义符
     #：behave level 优先级定义符
-       -1 : 被动
+       -1 : 被动（回合结束时触发）
+       -2 : unit初始化的状态条
        0-99 : less and faster
     >: behave target 目标类型定义符
        0:敌对非死亡单位

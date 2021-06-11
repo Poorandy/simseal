@@ -130,7 +130,7 @@ if __name__ == '__main__':
                 {
                     'id': 'm3',
                     'name': '精英牛头人',
-                    'behavior': '>4@selfHeal(2)#-1||>0@dirDamage(5)#1',
+                    'behavior': '>4@selfHeal(2)#-1||>0@dirDamage(5)#1||>0@incDamage(1)#-2',
                     'max_health': 200,
                     'max_sync': 100,
                     'max_power': 5,

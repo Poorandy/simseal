@@ -60,6 +60,18 @@ class Behavior:
         self.player.cur_power -= this_power
         print(f"- 【{self.player}】剩余能量【{self.player.cur_power}】")
 
+    def incDamage(self, increase):
+        print(f"- 【{self.player}】发动了【{increase}】点incDamage,目标是【{self.player}】")
+        self.player.buff.append(
+            {
+                'type': 'debuff',
+                'id': '灼烧id',
+                'behavior': '@selfDamage(2)',
+                'time': 2,
+                'level': 3
+            }
+        )
+
     def execute(self, func, *args):
         getattr(self, func)(*args)
 
