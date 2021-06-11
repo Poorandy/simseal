@@ -1,19 +1,9 @@
 # 战斗流程
-
-import django
-
-import os
-import json
-import sys
 import random
 
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-os.environ['DJANGO_SETTINGS_MODULE'] = 'simseal.settings'
-django.setup()
-
-from apps.simc.data.unit import MainUnit, CardUnit
-from apps.simc.battle.event import EventExecutor
 from apps.simc.battle.preprocess import preprocess
+from apps.simc.battle.event import EventExecutor
+from apps.simc.data.unit import MainUnit, CardUnit
 
 
 # todo: 费用没有用完；卡牌墓地
@@ -27,10 +17,12 @@ class BattleFlow:
     def __init__(self, battle_id, monsters: list, character: dict, cards: list):
         self.round = 0
         self.battle_id = battle_id
-        self.monsters = {monster.get('id'): MainUnit(monster) for monster in monsters}
+        self.monsters = {monster.get('id'): MainUnit(monster)
+                         for monster in monsters}
         self.cards = {card.get('id'): CardUnit(card) for card in cards}
         self.character = MainUnit(character)
-        self.all_units = {**self.monsters, **{self.character.id: self.character}}
+        self.all_units = {**self.monsters, **
+                          {self.character.id: self.character}}
         self.game_over = False
 
     def battle(self):
@@ -130,7 +122,7 @@ if __name__ == '__main__':
                 {
                     'id': 'm3',
                     'name': '精英牛头人',
-                    'behavior': '>4@selfHeal(2)#-1||>0@dirDamage(5)#1||>0@incDamage(1)#-2',
+                    'behavior': '>4@selfHeal(2)#-1||>0@dirDamage(5)#1',
                     'max_health': 200,
                     'max_sync': 100,
                     'max_power': 5,
