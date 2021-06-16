@@ -23,7 +23,8 @@ class MainUnit:
         return self.name
 
     def generate_buffs(self):
-        behaves = list(filter(lambda elem: elem.get('level')[0] == -2, preprocess(self.behavior)))
+        behaves = list(filter(lambda elem: elem.get('level')
+                       [0] == -2, preprocess(self.behavior)))
 
         return "buffs", "debuffs"
         pass
