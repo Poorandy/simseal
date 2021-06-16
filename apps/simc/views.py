@@ -83,7 +83,7 @@ class BattleView(APIView):
     def post(self, request):
         try:
             received_json_data = json.loads(request.body)
-            BattleField.objects.create(name=received_json_data.get('name', ""),
+            BattleField.objects.create(name=received_json_data.get('name'),
                                        summary=received_json_data.get(
                                            'summary', ""), editor=received_json_data.get('editor', "")
                                        )
@@ -92,6 +92,9 @@ class BattleView(APIView):
 
             response = {'code': 200, 'data': str(battle_flow),
                         'msg': 'success', 'total': 1}
+            BattleField.objects.filter(name=received_json_data.get(
+                'name')).update(combat_log=str(battle_flow))
+
         except Exception as e:
             response = {'code': 500, 'data': None,
                         'msg': str(e), 'total': None}

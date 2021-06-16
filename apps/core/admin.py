@@ -176,8 +176,8 @@ class BattleFieldAdmin(ExportActionModelAdmin, AjaxAdmin):
     search_fields = ('name',)
     list_filter = ('name',)
     date_hierarchy = 'update_time'
-    list_display = ('id', 'name',
-                    'summary', 'combat_log',  'editor', 'update_time')
+    list_display = ('name',
+                    'summary', 'editor', 'update_time')
     ordering = ['name']
     list_per_page = 100
 

@@ -45,9 +45,8 @@ class Monster(models.Model):
 
 
 class BattleField(models.Model):
-    id = models.UUIDField(
-        verbose_name='ID', default=uuid.uuid4, primary_key=True)
-    name = models.CharField(verbose_name="战斗名", max_length=255)
+    name = models.CharField(
+        verbose_name="战斗名", max_length=255, primary_key=True)
     summary = models.TextField(verbose_name="战斗描述", blank=True)
     # user_id = models.ForeignKey(
     #     User, on_delete=models.CASCADE, verbose_name="账号ID")
