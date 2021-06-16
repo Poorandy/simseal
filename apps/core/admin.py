@@ -160,3 +160,29 @@ class CharacterAdmin(ExportActionModelAdmin, AjaxAdmin):
     make_copy.icon = 'fas fa-paste'
     make_copy.style = 'background:orange;color:white'
     make_copy.confirm = '是否确认复制一份？'
+
+
+# 战斗admin
+
+class BattleFieldResource(resources.ModelResource):
+    class Meta:
+        exclude = ('id',)
+        model = BattleField
+
+
+@admin.register(BattleField)
+class BattleFieldAdmin(ExportActionModelAdmin, AjaxAdmin):
+    resource_class = BattleFieldResource
+    search_fields = ('name',)
+    list_filter = ('name',)
+    date_hierarchy = 'update_time'
+    list_display = ('id', 'name',
+                    'summary', 'combat_log',  'editor', 'update_time')
+    ordering = ['name']
+    list_per_page = 100
+
+    # actions = ['make_copy', 'link_module', 'run_index']
+    # actions = ['make_copy', ]
+
+    def message_success(self, request, queryset, context):
+        messages.add_message(request, messages.SUCCESS, context)

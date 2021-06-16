@@ -31,7 +31,7 @@ class CharacterView(APIView):
             data = json.loads(serializers.serialize("json", page_roles))
             total = json.loads(serializers.serialize(
                 "json", Character.objects.filter(delete_flag=0)))
-            response = {'code': 200, 'data': data,
+            response = {'code': 200, 'data': total,
                         'msg': 'success', 'total': len(list(total))}
         except Exception as e:
             response = {'code': 500, 'data': None,
@@ -50,7 +50,7 @@ class CardView(APIView):
             data = json.loads(serializers.serialize("json", page_roles))
             total = json.loads(serializers.serialize(
                 "json", Card.objects.filter(delete_flag=0)))
-            response = {'code': 200, 'data': data,
+            response = {'code': 200, 'data': total,
                         'msg': 'success', 'total': len(list(total))}
         except Exception as e:
             response = {'code': 500, 'data': None,
@@ -69,7 +69,7 @@ class MonsterView(APIView):
             data = json.loads(serializers.serialize("json", page_roles))
             total = json.loads(serializers.serialize(
                 "json", Monster.objects.filter(delete_flag=0)))
-            response = {'code': 200, 'data': data,
+            response = {'code': 200, 'data': total,
                         'msg': 'success', 'total': len(list(total))}
         except Exception as e:
             response = {'code': 500, 'data': None,
@@ -84,7 +84,8 @@ class BattleView(APIView):
         try:
             received_json_data = json.loads(request.body)
             BattleField.objects.create(name=received_json_data.get('name', ""),
-                                       summary=received_json_data.get('summary', "")
+                                       summary=received_json_data.get(
+                                           'summary', ""), editor=received_json_data.get('editor', "")
                                        )
             battle_flow = BattleFlow(**received_json_data)
             battle_flow.battle()

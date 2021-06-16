@@ -214,6 +214,10 @@ SIMPLEUI_CONFIG = {
             'name': 'CHARACTER',
             'icon': 'fas fa-grimace',
             'url': 'simc/character/'
+        }, {
+            'name': 'COMBAT',
+            'icon': 'fas fa-chess-knight',
+            'url': 'simc/battlefield'
         }]
 
     }]
