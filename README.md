@@ -128,6 +128,8 @@
 				- [ ] damage
 				- [ ] range
 				- [ ] time
+	
+	- [ ] AI
 
 
  
