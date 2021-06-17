@@ -3,23 +3,24 @@
 <HEAD>
 	<TITLE></TITLE>
 	<noscript><meta http-equiv="refresh" content="0;url=noscript.php"></noscript>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<META NAME="Generator" CONTENT="EditPlus">
 	<META NAME="Author" CONTENT="">
 	<META NAME="Keywords" CONTENT="">
 	<META NAME="Description" CONTENT="">
-	<link rel="stylesheet" href="/frontend/js/swiper.min.css">
-	<link rel="stylesheet" href="/frontend/js/bootstrap.min.css">
-	<link rel="stylesheet" href="/frontend/css/index.css">
-	<script src="/frontend/js/jquery.js"></script>
-	<script src="/frontend/js/swiper.min.js"></script>
-	<script src="/frontend/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="js/swiper.min.css">
+	<link rel="stylesheet" href="js/bootstrap.min.css">
+	<link rel="stylesheet" href="css/index.css">
+	<script src="js/jquery.js"></script>
+	<script src="js/swiper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 </HEAD>
 <BODY>
 <div class="head_box"></div>
 <div class="main_box">
 	<div class="post_line">
 		<div class="post_btn" id="resultBtn">模拟运行</div>
-		<div class="post_btn" style="margin-right: 30px;">重置</div>
+		<div class="post_btn" id="resetBtn" style="margin-right: 30px;">重置</div>
 	</div>
 	<div class="post_line" style="margin: 0;height: 30px;">
 		<div class="title_btn" style="float: left;">角色</div>
@@ -55,7 +56,7 @@
 				<!-- <div class="item_sld swiper-slide" data-num="0" data-id="1" data-blood="100" data-attack="50" >
 					<div class="item_name">盖伦</div>
 					<div class="item_line item_blood">血量：100</div>
-					<div class="item_line item_attack">攻击力：50</div>
+					<div class="item_line item_attack">同步值：50</div>
 					<div class="item_del" aria-hidden="true">x</div>
 				</div> -->
 			</div>
@@ -92,9 +93,13 @@
 				<span class="input-group-addon" id="basic-addon1">血量</span>
 				<input type="text" class="form-control" id="blood" placeholder="" aria-describedby="basic-addon1">
 			</div>
-			<div class="input-group">
-				<span class="input-group-addon" id="basic-addon1">攻击</span>
+			<div class="input-group" style="margin-bottom:10px;">
+				<span class="input-group-addon" id="basic-addon1">同步值</span>
 				<input type="text" class="form-control" id="attack" placeholder="" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1">效果</span>
+				<input type="text" class="form-control" id="effect" placeholder="" aria-describedby="basic-addon1">
 			</div>
 		</div>
 		<div class="modal-footer">
@@ -165,7 +170,7 @@ $(document).ready(function() {
 		var list='<div class="item_sld swiper-slide" data-num="'+num+'" data-id="'+id+'" data-blood="'+blood+'" data-attack="'+attack+'" data-effect="'+effect+'">'+
 					'<div class="item_name">'+$(this).find('.card_name').html()+'</div>'+
 					'<div class="item_line item_blood">血量：'+blood+'</div>'+
-					'<div class="item_line item_attack">攻击力：'+attack+'</div>'+
+					'<div class="item_line item_attack">同步值：'+attack+'</div>'+
 					'<div class="item_del" aria-hidden="true">x</div>'+
 				'</div>'
 		$(".mid_left .swiper-wrapper").append(list)
@@ -179,7 +184,7 @@ $(document).ready(function() {
 		var list='<div class="item_sld swiper-slide" data-num="'+num+'" data-id="'+id+'" data-blood="'+blood+'" data-attack="'+attack+'" data-effect="'+effect+'">'+
 					'<div class="item_name">'+$(this).find('.card_name').html()+'</div>'+
 					'<div class="item_line item_blood">血量：'+blood+'</div>'+
-					'<div class="item_line item_attack">攻击力：'+attack+'</div>'+
+					'<div class="item_line item_attack">同步值：'+attack+'</div>'+
 					'<div class="item_del" aria-hidden="true">x</div>'+
 				'</div>'
 		$(".mid_right .swiper-wrapper").append(list)
@@ -188,20 +193,24 @@ $(document).ready(function() {
 		var id=$(this).data('num');
 		var blood=$(this).data('blood');
 		var attack=$(this).data('attack');
+		var effect=$(this).data('effect');
 		$("#mode_id").val(id);
 		$("#mode_type").val(1);
 		$("#blood").val(blood);
 		$("#attack").val(attack);
+		$("#effect").val(effect);
 		$('#myModal').modal()
 	});
 	$(".mid_right").on('click','.item_sld',function(){
 		var id=$(this).data('num');
 		var blood=$(this).data('blood');
 		var attack=$(this).data('attack');
+		var effect=$(this).data('effect');
 		$("#mode_id").val(id);
 		$("#mode_type").val(2);
 		$("#blood").val(blood);
 		$("#attack").val(attack);
+		$("#effect").val(effect);
 		$('#myModal').modal()
 	});
 	$("#save_btn").on('click',function(){
@@ -211,19 +220,25 @@ $(document).ready(function() {
 		var attack=$("#attack").val();
 		if(type==1){
 			$(".mid_left .item_sld[data-num="+id+"]").find('.item_blood').html('血量：'+blood);
-			$(".mid_left .item_sld[data-num="+id+"]").find('.item_attack').html('攻击力：'+attack);
+			$(".mid_left .item_sld[data-num="+id+"]").find('.item_attack').html('同步值：'+attack);
 			$(".mid_left .item_sld[data-num="+id+"]").data('blood',blood);
 			$(".mid_left .item_sld[data-num="+id+"]").data('attack',attack);
 		}else if(type==2){
 			$(".mid_right .item_sld[data-num="+id+"]").find('.item_blood').html('血量：'+blood);
-			$(".mid_right .item_sld[data-num="+id+"]").find('.item_attack').html('攻击力：'+attack);
+			$(".mid_right .item_sld[data-num="+id+"]").find('.item_attack').html('同步值：'+attack);
 			$(".mid_right .item_sld[data-num="+id+"]").data('blood',blood);
 			$(".mid_right .item_sld[data-num="+id+"]").data('attack',attack);
 		}
 		$('#myModal').modal('hide');
 	});
 	$("#resultBtn").on('click',function(){
-		window.open('/frontend/list.html')
+		window.open('list.html')
+	});
+	$("#resetBtn").on('click',function(){
+		console.log(123)
+		$('.mid_left .swiper-wrapper').html('');
+		$('.mid_bottom .swiper-wrapper').html('');
+		$('.mid_right .swiper-wrapper').html('');
 	});
 	getCharacter();
 	getMonster();
@@ -238,7 +253,7 @@ function getCharacter(){
 				list+='<div class="card_btn swiper-slide" data-id="'+contArr[index].pk+'" data-effect="'+contArr[index].fields.behavior_script+'" data-blood="'+contArr[index].fields.health+'" data-attack="'+contArr[index].fields.sync+'">'+
 						'<div class="card_name">'+contArr[index].fields.name+'</div>'+
 						'<div class="card_blood">血量：'+contArr[index].fields.health+'</div>'+
-						'<div class="card_attack">攻击：'+contArr[index].fields.sync+'</div>'+
+						'<div class="card_attack">同步值：'+contArr[index].fields.sync+'</div>'+
 						'<div class="card_effect">效果：'+contArr[index].fields.behavior+'</div>'+
 					'</div>';
 			}
@@ -255,7 +270,7 @@ function getMonster(){
 				list+='<div class="card_btn swiper-slide" data-id="'+contArr[index].pk+'" data-effect="'+contArr[index].fields.behavior_script+'" data-blood="'+contArr[index].fields.health+'" data-attack="'+contArr[index].fields.sync+'">'+
 						'<div class="card_name">'+contArr[index].fields.name+'</div>'+
 						'<div class="card_blood">血量：'+contArr[index].fields.health+'</div>'+
-						'<div class="card_attack">攻击：'+contArr[index].fields.sync+'</div>'+
+						'<div class="card_attack">同步值：'+contArr[index].fields.sync+'</div>'+
 						'<div class="card_effect">效果：'+contArr[index].fields.behavior+'</div>'+
 					'</div>';
 			}
