@@ -43,13 +43,15 @@
 			- [x] 怪物后攻
 			- [x] 怪物天赋
 
-		- [ ] 目标选择器
+		- [x] 目标选择器
 			- [x] target_flag
 			  > 根据behave level
-        - [ ] 战斗结束检测器
+        - [x] 战斗结束检测器
+			- [x] 角色血量为0
+			- [x] 怪物血量全为0
 
 	- [ ] 单位类
-		- [ ] 主要属性
+		- [x] 主要属性
 			- [x] id
 			- [x] 名称
 			- [x] 生命值上限
@@ -62,17 +64,17 @@
 		- [ ] 其他属性
 			- [x] 能力(behave)
 				- [x] 前处理(preprocess)
-					- [ ] @ behave func 方法定义符
-					- [ ] # behave level 优先级定义符
-						- [ ] -1 被动（回合结束时触发）
-						- [ ] -2 unit初始化的状态条
-						- [ ] 0-99  less and faster
-					- [ ] > behave target 目标类型定义符
-						- [ ] 0 敌对非死亡单位(默认)
-   						- [ ] 1 敌对所有单位
-       					- [ ] 2 友方非死亡单位
-       					- [ ] 3 友方所有单位
-       					- [ ] 4 自身
+					- [x] @ behave func 方法定义符
+					- [x] # behave level 优先级定义符
+						-  -1 被动（回合结束时触发）
+						-  -2 unit初始化的状态条
+						-  0-99  less and faster
+					- [x] > behave target 目标类型定义符
+						-  0 敌对非死亡单位(默认)
+   						-  1 敌对所有单位
+       					-  2 友方非死亡单位
+       					-  3 友方所有单位
+       					-  4 自身
 			- [x] buff栏
 				- [ ] initiaiize @generate_buff(#-2)
 			- [x] debuff栏
