@@ -14,7 +14,7 @@ class BattleFlow:
     战斗流
     """
 
-    def __init__(self, name, monsters: list, character: dict, cards: list):
+    def __init__(self, name, monsters: list, character: dict, cards: list, loop=100):
         self.round = 0
         self.battle_name = name
         self.monsters = {monster.get('id'): MainUnit(monster)

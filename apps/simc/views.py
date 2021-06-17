@@ -81,22 +81,24 @@ class MonsterView(APIView):
 class BattleView(APIView):
 
     def post(self, request):
-        try:
-            received_json_data = json.loads(request.body)
-            BattleField.objects.create(name=received_json_data.get('name'),
-                                       summary=received_json_data.get(
-                                           'summary', ""), editor=received_json_data.get('editor', "")
-                                       )
-            battle_flow = BattleFlow(**received_json_data)
-            battle_flow.battle()
 
-            response = {'code': 200, 'data': str(battle_flow),
-                        'msg': 'success', 'total': 1}
-            BattleField.objects.filter(name=received_json_data.get(
-                'name')).update(combat_log=str(battle_flow))
+        received_json_data = json.loads(request.body)
+        keys = ["name", "monsters", "character", "cards"]
+        battle_data = {key: received_json_data.get(key) for key in keys}
+        BattleField.objects.create(name=received_json_data.get('name'),
+                                   summary=received_json_data.get(
+                                       'summary', ""), editor=received_json_data.get('editor', "")
+                                   )
+        battle_flow = BattleFlow(**battle_data)
+        battle_flow.battle()
 
-        except Exception as e:
-            response = {'code': 500, 'data': None,
-                        'msg': str(e), 'total': None}
+        response = {'code': 200, 'data': str(battle_flow),
+                    'msg': 'success', 'total': 1}
+        BattleField.objects.filter(name=received_json_data.get(
+            'name')).update(combat_log=str(battle_flow))
+
+        # except Exception as e:
+        #     response = {'code': 500, 'data': None,
+        #                 'msg': str(e), 'total': None}
 
         return Response(response)
