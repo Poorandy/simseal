@@ -8,7 +8,7 @@ class ModelsTest(TestCase):
 
     def test_event_models(self):
         try:
-            battle_flow = BattleFlow(battle_id='1', monsters=[
+            battle_flow = BattleFlow(name='test001', monsters=[
                 {
                     'id': 'm1',
                     'name': '哥布林',
@@ -62,6 +62,7 @@ class ModelsTest(TestCase):
             ])
 
             battle_flow.battle()
+            print(battle_flow)
 
         except:
             raise SyntaxError

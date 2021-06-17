@@ -22,7 +22,7 @@ class BattleFlow:
         self.cards = {card.get('id'): CardUnit(card) for card in cards}
         self.character = MainUnit(character)
         self.all_units = {**self.monsters, **
-        {self.character.id: self.character}}
+                          {self.character.id: self.character}}
         self.game_over = False
         self.battle_log = ""
 
@@ -46,19 +46,22 @@ class BattleFlow:
             # 再用被动
             self.battle_log += f"- *** 【{sender}】使用被动 ***\n"
             context = sender.behavior
-            target = self.get_target(context, sender)
-            event_executor = EventExecutor(context, target, sender)
-            event_executor.execute()
-            self.battle_log += event_executor.__str__()
+            for ctx in context.split('||'):
+                target = self.get_target(ctx, sender)
+                event_executor = EventExecutor(ctx, target, sender)
+                event_executor.execute()
+                self.battle_log += event_executor.__str__()
+
             # 怪物回合
             for sender in list(self.monsters.values()):
                 if sender.cur_health and not self.check_game_over():
                     self.battle_log += f"- *** 【{sender}】使用被动 ***\n"
                     context = sender.behavior
-                    target = self.get_target(context, sender)
-                    event_executor = EventExecutor(context, target, sender)
-                    event_executor.execute()
-                    self.battle_log += event_executor.__str__()
+                    for ctx in context.split('||'):
+                        target = self.get_target(ctx, sender)
+                        event_executor = EventExecutor(ctx, target, sender)
+                        event_executor.execute()
+                        self.battle_log += event_executor.__str__()
 
         if not self.check_game_over():
             self.battle()
