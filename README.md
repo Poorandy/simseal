@@ -1,21 +1,133 @@
 # simseal
 > 数值模拟平台
 
- - [x] 前端返回模拟需要的卡牌列表、角色信息、怪物列表、模拟次数
- - [x] 单位类
- - [x] 卡牌类
- - [x] 事件执行器
- - [ ] 每回合费用没有用完
- - [ ] 卡牌墓地
- - [x] 目标类型:敌对（友方）非死亡目标、敌对（友方）全部目标、自己
- - [ ] 手牌数量限制
- - [x] 事件优先级
- - [x] 战斗流
- - [ ] behavior和feedback没有作为单位类的方法，而是建了behavior和feedback类，可以优化
- - [ ] Unit类的卡牌机制（召唤类）
- - [ ] AOE效果
- - [ ] 状态检测器
- - [ ] 被动触发机制完善，目前只做了该单位结束回合之前触发
+- [ ] 前端
+	- QUICK SIM
+    	- [ ] 新建战斗
+    	- [x] 卡牌池
+        	- [x] 选择卡牌
+            - [x] 编辑卡牌
+        	- [ ] 搜索卡牌
+        - [x] 角色池
+        	- [x] 选择角色
+	    	- [x] 编辑角色
+	    	- [ ] 搜索角色
+    	- [x] 怪物池
+        	- [x] 选择怪物
+        	- [x] 编辑怪物
+        	- [ ] 搜索怪物
+		- [x] 提交战斗
+	    	- [ ] 模拟次数
+	    	- [ ] 战斗日志
+	    	- [ ] 战斗分析
+    - AUTH
+    	- [x] User
+		- [x] Group
+    - SETTINGS
+    	- [x] 新增模板，修改模板，导出模板
+	    	- [x] MONSTERS 
+        	- [x] CARDS 
+        	- [x] CHARACTERS 
+        	- [x] COMBAT
+	 
+
+- [ ] 后端
+
+	- [ ] 战斗流
+		- [ ] 战斗执行器
+			- [x] 玩家先攻
+		    	- [ ] 费用用完
+				- [ ] 卡牌回收
+				- [ ] 卡牌墓地
+			- [x] 玩家天赋
+			- [x] 怪物后攻
+			- [x] 怪物天赋
+
+		- [ ] 目标选择器
+			- [x] target_flag
+			  > 根据behave level
+        - [ ] 战斗结束检测器
+
+	- [ ] 单位类
+		- [ ] 主要属性
+			- [x] id
+			- [x] 名称
+			- [x] 生命值上限
+			- [x] 费用上限
+			- [x] 同步值上限
+			- [x] 当前生命值
+			- [x] 当前费用
+			- [x] 当前同步值
+			- [x] 敌对标记
+		- [ ] 其他属性
+			- [x] 能力(behave)
+				- [x] 前处理(preprocess)
+					- [ ] @ behave func 方法定义符
+					- [ ] # behave level 优先级定义符
+						- [ ] -1 被动（回合结束时触发）
+						- [ ] -2 unit初始化的状态条
+						- [ ] 0-99  less and faster
+					- [ ] > behave target 目标类型定义符
+						- [ ] 0 敌对非死亡单位(默认)
+   						- [ ] 1 敌对所有单位
+       					- [ ] 2 友方非死亡单位
+       					- [ ] 3 友方所有单位
+       					- [ ] 4 自身
+			- [x] buff栏
+				- [ ] initiaiize @generate_buff(#-2)
+			- [x] debuff栏
+				- [ ] initialize @generate_buff(#-2)
+			- [ ] 手牌数量上限
+			- [ ] 当前手牌数量
+
+	- [ ] 卡牌类
+		- [x] id
+		- [x] 名称
+		- [x] 费用
+		- [x] 能力
+		- [x] 类型
+			- [ ] Spells
+			- [ ] Unit
+
+	- [ ] 事件执行器类
+		- [x] behavior
+			- [x] 执行器(sender, target, behave)
+				- [x] parsing behave and run the func
+					- [ ] check buffs 
+					- [x] update sender
+					- [x] send message to feedback
+
+		- [x] feedback
+			- [x] 执行器(source, receiver, behave)
+				- [x] parsing behave and run the func
+					- [ ] check buffs
+					- [x] update receiver
+		
+		> tips: behavior和feedback可以理解成膝跳反射，behavior接受命令，更新来源的状态，传递给feedback，feedback更新目标状态。作为事件执行器的最小单元。我们可以想象一个A攻击B B反伤A的事件，其实可以用2个behavior-feedback单元组合形成，只不过来源和目标互换了位置
+		- [ ] func 
+			- [ ] selfHeal()
+				- [ ] level
+				- [x] heal
+			- [ ] dirHeal()
+				- [ ] level
+				- [ ] heal
+				- [ ] range
+			- [ ] dirDamage()
+			    - [ ] level
+				- [x] damage
+				- [ ] range
+			- [ ] susHeal()
+			    - [ ] level
+				- [ ] heal
+				- [ ] range
+				- [ ] time
+			- [ ] susDamage()
+			    - [ ] level
+				- [ ] damage
+				- [ ] range
+				- [ ] time
+
+
  
 ## flow_chart
 https://miro.com/app/board/o9J_lAZ_8Q4=/
