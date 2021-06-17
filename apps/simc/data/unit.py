@@ -13,7 +13,7 @@ class MainUnit:
         self.max_sync = unit.get('max_sync')
         self.cur_power = unit.get('max_power')
         self.max_power = unit.get('max_power')
-        self.behavior = unit.get('behavior')
+        self.behavior = unit.get('behavior_script')
         self.buffs, self.debuffs = self.generate_buffs()
         self.enemy = unit.get('enemy')
 
@@ -35,7 +35,7 @@ class CardUnit:
     def __init__(self, unit):
         self.id = unit.get('id')
         self.name = unit.get('name')
-        self.behavior = unit.get('behavior')
+        self.behavior = unit.get('behavior_script')
         self.power = unit.get('power')
         self.type = unit.get('type')
 
@@ -49,7 +49,7 @@ if __name__ == '__main__':
     unit = MainUnit({
         'id': 'm3',
         'name': '精英牛头人',
-        'behavior': '>4@selfHeal(2)#-1||>0@dirDamage(5)#1||>0@incDamage(1)#-2',
+        'behavior_script': '>4@selfHeal(2)#-1||>0@dirDamage(5)#1||>0@incDamage(1)#-2',
         'max_health': 200,
         'max_sync': 100,
         'max_power': 5,

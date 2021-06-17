@@ -12,7 +12,7 @@ class ModelsTest(TestCase):
                 {
                     'id': 'm1',
                     'name': '哥布林',
-                    'behavior': '>0@dirDamage(2)#1',
+                    'behavior_script': '>0@dirDamage(2)#1',
                     'max_health': 150,
                     'max_sync': 100,
                     'max_power': 5,
@@ -21,7 +21,7 @@ class ModelsTest(TestCase):
                 {
                     'id': 'm2',
                     'name': '回血史莱姆',
-                    'behavior': '>4@selfHeal(1)#-1',
+                    'behavior_script': '>4@selfHeal(1)#-1',
                     'max_health': 100,
                     'max_sync': 100,
                     'max_power': 5,
@@ -30,7 +30,7 @@ class ModelsTest(TestCase):
                 {
                     'id': 'm3',
                     'name': '精英牛头人',
-                    'behavior': '>4@selfHeal(2)#-1||>0@dirDamage(5)#1',
+                    'behavior_script': '>4@selfHeal(2)#-1||>0@dirDamage(5)#1',
                     'max_health': 200,
                     'max_sync': 100,
                     'max_power': 5,
@@ -39,7 +39,7 @@ class ModelsTest(TestCase):
             ], character={
                 'id': 'ch1',
                 'name': '勇士',
-                'behavior': '>0@dirDamage(1)#1||>4@selfHeal(2)#-1',
+                'behavior_script': '>0@dirDamage(1)#1||>4@selfHeal(2)#-1',
                 'max_health': 100,
                 'max_sync': 100,
                 'max_power': 5,
@@ -48,14 +48,14 @@ class ModelsTest(TestCase):
                 {
                     'id': 'c1',
                     'name': '平砍',
-                    'behavior': '>0@dirDamage(5)#1',
+                    'behavior_script': '>0@dirDamage(5)#1',
                     'power': 1,
                     'type': 'Spells'  # Spells / Unit
                 },
                 {
                     'id': 'c2',
                     'name': '重击',
-                    'behavior': '>0@dirDamage(10)#1',
+                    'behavior_script': '>0@dirDamage(10)#1',
                     'power': 2,
                     'type': 'Spells'  # Spells / Unit
                 }
