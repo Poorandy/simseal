@@ -63,6 +63,7 @@ class ModelsTest(TestCase):
 
             battle_flow.battle()
             print(battle_flow)
+            # 测试gitee和github同步
 
         except:
             raise SyntaxError
