@@ -78,7 +78,7 @@ class MonsterView(APIView):
         return Response(response)
 
 
-class BattleView(APIView):
+class BattleSimc(APIView):
 
     def post(self, request):
 
@@ -100,5 +100,24 @@ class BattleView(APIView):
         # except Exception as e:
         #     response = {'code': 500, 'data': None,
         #                 'msg': str(e), 'total': None}
+
+        return Response(response)
+
+
+class BattleView(APIView):
+
+    def get(self, request):
+        try:
+            pg = sealPagination()
+            page_roles = pg.paginate_queryset(
+                queryset=BattleField.objects.filter(delete_flag=0), request=request, view=self)
+            data = json.loads(serializers.serialize("json", page_roles))
+            total = json.loads(serializers.serialize(
+                "json", BattleField.objects.filter(delete_flag=0)))
+            response = {'code': 200, 'data': total,
+                        'msg': 'success', 'total': len(list(total))}
+        except Exception as e:
+            response = {'code': 500, 'data': None,
+                        'msg': str(e), 'total': None}
 
         return Response(response)
