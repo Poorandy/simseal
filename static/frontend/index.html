@@ -392,6 +392,7 @@ $(document).ready(function() {
 		$('.mid_bottom .card_sld').each(function(){
 			cards.push({
 				id:$(this).data('id'),
+				card_id:$(this).data('num'),
 				name:$(this).find('.card_name').html(),
 				behavior_script:$(this).data('effect'),
 				power:$(this).data('power'),
