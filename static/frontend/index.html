@@ -256,8 +256,8 @@ $(document).ready(function() {
 	});
 	$(".right_box").on('click','.card_btn',function(){
 		var id=$(this).data('id');
-		if($(".mid_right .item_sld[data-id="+id+"]").length>4){
-			alert('相同怪物最多放5个')
+		if($(".mid_right .item_sld").length>4){
+			alert('怪物最多放5个')
 		}else{
 			var attack=$(this).data('attack');
 			var blood=$(this).data('blood');
@@ -382,6 +382,7 @@ $(document).ready(function() {
 				id:$(this).data('id'),
 				name:$(this).find('.item_name').html(),
 				behavior_script:$(this).data('effect'),
+				unit_id:$(this).data('num'),
 				enemy:'Ture',
 				max_health:$(this).data('blood'),
 				max_sync:$(this).data('attack'),
@@ -418,6 +419,7 @@ $(document).ready(function() {
 	getCharacter();
 	getMonster();
 	getCards();
+	getOldF();
 });
 function getCharacter(){
 	$.get('http://furioso.fun/api/character/',function(data){
@@ -474,6 +476,13 @@ function postFight(jsondata){
 		if(data.code==200&&data.total>0){
 			var cont=data.data;
 			$("#home").html(cont.replaceAll('\n','<br>'));
+		}
+	},'json');
+}
+function getOldF(){
+	$.get('http://furioso.fun/api/combat/',function(data){
+		if(data.code=='200'&&data.total>0){
+			
 		}
 	},'json');
 }
