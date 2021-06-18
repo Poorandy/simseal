@@ -1,5 +1,5 @@
 html{width: 100%;height: 100%;}
-body{width: 100%;height: 100%;overflow: hidden;background-color: rgb(51, 51, 57);margin: 0;}
+body{width: 100%;height: 100%;overflow: auto;background-color: rgb(51, 51, 57);margin: 0;}
 .head_box{width: 100%;height: 64px;background-color: #000;}
 .main_box{width: 1200px;margin: 0 auto;padding-top: 30px;}
 .left_box{float: left;width: 200px;height: 500px;background-color: rgb(41, 41, 41);border-radius: 10px;}
@@ -29,6 +29,11 @@ body{width: 100%;height: 100%;overflow: hidden;background-color: rgb(51, 51, 57)
 .card_item .item_name{width: 100px;height: 60px;margin: 0 auto;display: flex;justify-content: center;align-items: center;}
 .card_item .item_power{width: 100px;height: 20px;line-height: 20px;margin: 0 auto;}
 .card_item .item_effect{width: 100px;height: 100px;margin: 0 auto;word-break: break-all;overflow: auto;}
+
+.card_sld{width: 80px;height: 90px;margin-right: 10px;background-color: aqua;border-radius: 10px;}
+.card_sld .card_name{width: 100%;height: 40px;display: flex;justify-content: center;align-items: center;}
+.card_sld .card_power{width: 100%;height: 40px;display: flex;justify-content: center;align-items: center;}
+.card_sld .item_del{position: absolute;top: 5px;right: 5px;cursor: pointer;padding: 5px;font-size: 18px;width: 20px;height: 20px;text-align: center;line-height: 10px;}
 
 .list_main{width: 1200px;margin: 20px auto 0;}
 .list_main #myTabs a{color: rgb(255, 187, 51);}
