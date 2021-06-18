@@ -11,6 +11,7 @@ class ModelsTest(TestCase):
             battle_flow = BattleFlow(name='test001', monsters=[
                 {
                     'id': 'm1',
+                    'unit_id': 'goblin',
                     'name': '哥布林',
                     'behavior_script': '>0@dirDamage(2)#1',
                     'max_health': 150,
@@ -20,7 +21,8 @@ class ModelsTest(TestCase):
                 },
                 {
                     'id': 'm2',
-                    'name': '回血史莱姆',
+                    'unit_id': 'goblin',
+                    'name': '哥布林',
                     'behavior_script': '>4@selfHeal(1)#-1',
                     'max_health': 100,
                     'max_sync': 100,
@@ -29,6 +31,7 @@ class ModelsTest(TestCase):
                 },
                 {
                     'id': 'm3',
+                    'unit_id': 'ntr',
                     'name': '精英牛头人',
                     'behavior_script': '>4@selfHeal(2)#-1||>0@dirDamage(5)#1',
                     'max_health': 200,
@@ -38,6 +41,7 @@ class ModelsTest(TestCase):
                 }
             ], character={
                 'id': 'ch1',
+                'unit_id': 'warrior',
                 'name': '勇士',
                 'behavior_script': '>0@dirDamage(1)#1||>4@selfHeal(2)#-1',
                 'max_health': 100,
@@ -47,6 +51,7 @@ class ModelsTest(TestCase):
             }, cards=[
                 {
                     'id': 'c1',
+                    'card_id': 'pk',
                     'name': '平砍',
                     'behavior_script': '>0@dirDamage(5)#1',
                     'power': 1,
@@ -54,6 +59,7 @@ class ModelsTest(TestCase):
                 },
                 {
                     'id': 'c2',
+                    'card_id': 'zj',
                     'name': '重击',
                     'behavior_script': '>0@dirDamage(10)#1',
                     'power': 2,
