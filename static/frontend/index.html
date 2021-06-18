@@ -368,7 +368,8 @@ $(document).ready(function() {
 		var cards=[];
 		$('.mid_left .item_sld').each(function(){
 			charact={
-				id:$(this).data('id'),
+				id:$(this).data('num'),
+				unit_id:$(this).data('id'),
 				name:$(this).find('.item_name').html(),
 				behavior_script:$(this).data('effect'),
 				enemy:'False',
@@ -379,10 +380,10 @@ $(document).ready(function() {
 		});
 		$('.mid_right .item_sld').each(function(){
 			monster.push({
-				id:$(this).data('id'),
+				id:$(this).data('num'),
 				name:$(this).find('.item_name').html(),
 				behavior_script:$(this).data('effect'),
-				unit_id:$(this).data('num'),
+				unit_id:$(this).data('id'),
 				enemy:'Ture',
 				max_health:$(this).data('blood'),
 				max_sync:$(this).data('attack'),
@@ -391,8 +392,8 @@ $(document).ready(function() {
 		});
 		$('.mid_bottom .card_sld').each(function(){
 			cards.push({
-				id:$(this).data('id'),
-				card_id:$(this).data('num'),
+				id:$(this).data('num'),
+				card_id:$(this).data('id'),
 				name:$(this).find('.card_name').html(),
 				behavior_script:$(this).data('effect'),
 				power:$(this).data('power'),
