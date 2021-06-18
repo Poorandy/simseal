@@ -81,13 +81,13 @@ class MonsterView(APIView):
 class BattleSimc(APIView):
 
     def post(self, request):
-
+        editor = self.request.user.id
         received_json_data = json.loads(request.body)
         keys = ["name", "monsters", "character", "cards"]
         battle_data = {key: received_json_data.get(key) for key in keys}
         BattleField.objects.update_or_create(name=received_json_data.get('name'),
                                              summary=received_json_data.get(
-            'summary', ""), editor=received_json_data.get('editor', "")
+            'summary', ""), editor=editor
         )
         battle_flow = BattleFlow(**battle_data)
         battle_flow.battle()
