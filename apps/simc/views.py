@@ -5,7 +5,7 @@ from rest_framework.pagination import PageNumberPagination
 from django.shortcuts import render
 from django.core import serializers
 
-from .models import Card, Character, Monster, BattleField
+from .models import Card, Character, Monster, BattleField, User
 from apps.simc.battle.battle_flow import BattleFlow
 
 import json
@@ -85,10 +85,10 @@ class BattleSimc(APIView):
         received_json_data = json.loads(request.body)
         keys = ["name", "monsters", "character", "cards"]
         battle_data = {key: received_json_data.get(key) for key in keys}
-        BattleField.objects.create(name=received_json_data.get('name'),
-                                   summary=received_json_data.get(
-                                       'summary', ""), editor=received_json_data.get('editor', "")
-                                   )
+        BattleField.objects.update_or_create(name=received_json_data.get('name'),
+                                             summary=received_json_data.get(
+            'summary', ""), editor=received_json_data.get('editor', "")
+        )
         battle_flow = BattleFlow(**battle_data)
         battle_flow.battle()
 
@@ -97,10 +97,6 @@ class BattleSimc(APIView):
         BattleField.objects.filter(name=received_json_data.get(
             'name')).update(combat_log=str(battle_flow))
 
-        # except Exception as e:
-        #     response = {'code': 500, 'data': None,
-        #                 'msg': str(e), 'total': None}
-
         return Response(response)
 
 
@@ -108,9 +104,10 @@ class BattleView(APIView):
 
     def get(self, request):
         try:
+            editor = self.request.user.id
             pg = sealPagination()
             page_roles = pg.paginate_queryset(
-                queryset=BattleField.objects.filter(delete_flag=0), request=request, view=self)
+                queryset=BattleField.objects.filter(delete_flag=0, editor=editor), request=request, view=self)
             data = json.loads(serializers.serialize("json", page_roles))
             total = json.loads(serializers.serialize(
                 "json", BattleField.objects.filter(delete_flag=0)))
@@ -119,5 +116,22 @@ class BattleView(APIView):
         except Exception as e:
             response = {'code': 500, 'data': None,
                         'msg': str(e), 'total': None}
+
+        return Response(response)
+
+
+class BattleIsExist(APIView):
+
+    def get(self, request):
+        try:
+            name = request.GET['name']
+            total = json.loads(serializers.serialize(
+                "json", BattleField.objects.filter(delete_flag=0, name=name)))
+            print(total)
+            response = {'code': 200, 'data': total != [],
+                        'msg': 'success'}
+        except Exception as e:
+            response = {'code': 500, 'data': None,
+                        'msg': str(e)}
 
         return Response(response)
