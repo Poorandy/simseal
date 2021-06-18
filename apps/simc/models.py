@@ -68,7 +68,9 @@ class Card(models.Model):
         verbose_name='ID', default=uuid.uuid4, primary_key=True)
     name = models.CharField(verbose_name="卡牌名", max_length=30)
     summary = models.TextField(verbose_name="卡牌描述")
-    type = models.CharField(verbose_name="卡牌类型", default="Unit", max_length=16)
+    card_choice = (("法术牌", "Spells"), ("单位牌", "Unit"))
+    type = models.CharField(
+        choices=card_choice, verbose_name="卡牌类型", default="Spells", max_length=16)
     power = models.IntegerField(verbose_name="费用", default=1)
     material = models.CharField(
         verbose_name="施法材料", default='undefined', max_length=25)
