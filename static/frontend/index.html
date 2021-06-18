@@ -83,6 +83,11 @@
 	</div>
 </div>
 <div class="list_main">
+	<div class="fightlist swiper-container">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide fitem"></div>
+		</div>
+	</div>
 	<ul class="nav nav-tabs" id="myTabs" role="tablist">
 		<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">战斗记录</a></li>
 		<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">伤害占比</a></li>
@@ -208,17 +213,27 @@ $(document).ready(function() {
 		observer: true,//修改swiper自己或子元素时，自动初始化swiper
 		observeParents: true,//修改swiper的父元素时，自动初始化swiper
 	});
-	var mySwiper4 = new Swiper('.mid_bottom',{
+	var mySwiper7 = new Swiper('.fightlist',{
+		direction: 'vertical',
 		slidesPerView: 'auto',
 		freeMode: true,
 		observer: true,//修改swiper自己或子元素时，自动初始化swiper
 		observeParents: true,//修改swiper的父元素时，自动初始化swiper
 	});
-	var mySwiper4 = new Swiper('.btm_box',{
+	var mySwiper5 = new Swiper('.mid_bottom',{
 		slidesPerView: 'auto',
 		freeMode: true,
 		observer: true,//修改swiper自己或子元素时，自动初始化swiper
 		observeParents: true,//修改swiper的父元素时，自动初始化swiper
+	});
+	var mySwiper6 = new Swiper('.btm_box',{
+		slidesPerView: 'auto',
+		freeMode: true,
+		observer: true,//修改swiper自己或子元素时，自动初始化swiper
+		observeParents: true,//修改swiper的父元素时，自动初始化swiper
+	});
+	$("#fightname").change(function(){
+		checkName($(this).val())
 	});
 	$(".mid_left").on('click','.item_del',function(e){
 		$(this).parent().remove();
@@ -317,6 +332,14 @@ $(document).ready(function() {
 		$("#power").val(power);
 		$("#card_effect").val(effect);
 		$('#myModal2').modal()
+	});
+	$(".fightlist").on('click','.fitem',function(){
+		var id=$(this).data('id');
+		var cont=localStorage.getItem('fight');
+		if(cont){
+			cont=JSON.parse(cont);
+			$("#home").html(cont[id].fields.combat_log.replaceAll('\n','<br>'));
+		}
 	});
 	$("#card_save").on('click',function(){
 		var id=$("#mode_id").val();
@@ -484,7 +507,22 @@ function postFight(jsondata){
 function getOldF(){
 	$.get('http://furioso.fun/api/combat/',function(data){
 		if(data.code=='200'&&data.total>0){
-			
+			var contArr=data.data;
+			var list=''
+			for (var index = 0; index < contArr.length; index++) {
+				list += '<div class="swiper-slide fitem" data-id="'+index+'">'+contArr[index].pk+'</div>';
+			}
+			$(".fightlist .swiper-wrapper").html(list);
+			localStorage.setItem('fight',JSON.stringify(contArr));
+		}
+	},'json');
+}
+function checkName(name){
+	$.get('http://furioso.fun/api/combat_check/',{name:name},function(data){
+		if(data.code=='200'){
+			if(data.data==true){
+				alert('该战斗已存在，继续提交将覆盖原有数据')
+			}
 		}
 	},'json');
 }
