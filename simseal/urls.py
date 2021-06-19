@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from django.views.static import serve
 from django.views.generic import RedirectView
 
-from apps.simc.views import CharacterView, CardView, MonsterView, BattleView, BattleSimc
+from apps.simc.views import CharacterView, CardView, MonsterView, BattleView, BattleSimc, BattleIsExist
 admin.site.site_title = f'PROJECT SEAL SIMULAION PLATFORM'
 admin.site.site_header = f'SIMSEAL'
 
@@ -33,6 +33,7 @@ urlpatterns = [
     path('api/monster/', MonsterView.as_view()),
     path('api/battle/', BattleSimc.as_view()),
     path('api/combat/', BattleView.as_view()),
+    path('api/combat_check/', BattleIsExist.as_view()),
     url(r'^favicon\.ico$', RedirectView.as_view(
         url='/static/images/favicon.ico')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

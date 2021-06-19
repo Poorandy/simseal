@@ -24,8 +24,8 @@ class Monster(models.Model):
     behavior_script = models.TextField(
         verbose_name="单位行为代码", null=True, blank=True)
     unit_flag = models.IntegerField(verbose_name="单位标记", default=0)
-    editor = models.CharField(
-        verbose_name='编辑人', max_length=25, null=True, blank=True)
+    editor = models.ForeignKey(
+        User, on_delete=models.CASCADE, verbose_name="编辑人", null=True, blank=True, default=None)
     update_time = models.DateTimeField(
         verbose_name="更新时间", auto_now=True)
     create_time = models.DateTimeField(
@@ -48,11 +48,13 @@ class BattleField(models.Model):
     name = models.CharField(
         verbose_name="战斗名", max_length=255, primary_key=True)
     summary = models.TextField(verbose_name="战斗描述", blank=True)
-    # user_id = models.ForeignKey(
-    #     User, on_delete=models.CASCADE, verbose_name="账号ID")
+    editor = models.ForeignKey(
+        User, on_delete=models.CASCADE, verbose_name="编辑人", null=True, blank=True, default=None)
     combat_log = models.TextField(verbose_name="战斗日志", blank=True)
-    editor = models.CharField(
-        verbose_name='编辑人', max_length=25, null=True, blank=True)
+    monster = models.TextField(verbose_name="战斗日志", blank=True)
+    character = models.TextField(verbose_name="战斗日志", blank=True)
+    card = models.TextField(verbose_name="战斗日志", blank=True)
+    loop = models.TextField(verbose_name="战斗日志", blank=True)
     update_time = models.DateTimeField(
         verbose_name="更新时间", auto_now=True)
     create_time = models.DateTimeField(
@@ -81,8 +83,8 @@ class Card(models.Model):
     behavior = models.TextField(verbose_name="单位行为")
     behavior_script = models.TextField(
         verbose_name="单位行为代码", null=True, blank=True)
-    editor = models.CharField(
-        verbose_name='编辑人', max_length=25, null=True, blank=True)
+    editor = models.ForeignKey(
+        User, on_delete=models.CASCADE, verbose_name="编辑人", null=True, blank=True, default=None)
     update_time = models.DateTimeField(
         verbose_name="更新时间", auto_now=True)
     create_time = models.DateTimeField(
@@ -107,8 +109,8 @@ class Character(models.Model):
     behavior = models.TextField(verbose_name="单位行为")
     behavior_script = models.TextField(
         verbose_name="单位行为代码", null=True, blank=True)
-    editor = models.CharField(
-        verbose_name='编辑人', max_length=25, null=True, blank=True)
+    editor = models.ForeignKey(
+        User, on_delete=models.CASCADE, verbose_name="编辑人", null=True, blank=True, default=None)
     update_time = models.DateTimeField(
         verbose_name="更新时间", auto_now=True)
     create_time = models.DateTimeField(
