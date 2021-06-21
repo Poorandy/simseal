@@ -3,10 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 
-from django.shortcuts import render
 from django.core import serializers
-import django
-from django.contrib.auth.decorators import login_required
 
 from .models import Card, Character, Monster, BattleField, User
 from apps.simc.battle.battle_flow import BattleFlow
@@ -61,6 +58,7 @@ class CardView(APIView):
 
 
 class MonsterView(APIView):
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         try:
