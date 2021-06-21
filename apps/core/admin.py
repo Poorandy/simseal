@@ -1,15 +1,19 @@
 import uuid
+from datetime import datetime
+
 from django.contrib import admin, messages
-from apps.simc.models import Monster, Card, Character, BattleField
+from django.http import JsonResponse
 from import_export import resources
 from import_export.admin import ImportExportActionModelAdmin, ExportActionModelAdmin
 from simpleui.admin import AjaxAdmin
+from rest_framework.authtoken.admin import TokenAdmin
 
-from datetime import datetime
-
-from django.http import JsonResponse
+from apps.simc.models import Monster, Card, Character, BattleField
 
 # Register your models here.
+
+TokenAdmin.raw_id_fields = ['user']
+
 
 # 怪物admin
 
@@ -30,6 +34,7 @@ class MonsterAdmin(ExportActionModelAdmin, AjaxAdmin):
                     'behavior_script', 'health', 'sync', 'editor', 'update_time')
     ordering = ['name']
     list_per_page = 100
+
     # actions = ['make_copy', ]
 
     def message_success(self, request, queryset, context):

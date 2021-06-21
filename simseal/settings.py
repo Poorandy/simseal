@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'import_export',
     'apps.core',
     'apps.plat',
@@ -153,8 +154,6 @@ USE_L10N = True
 USE_TZ = True
 
 DEFAULT_CHARSET = 'UTF-8'
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
 if DEBUG:
@@ -163,21 +162,16 @@ else:
     STATIC_ROOT = str(BASE_DIR / 'static')
 
 
-# STATIC_ROOT = '/static/'
-
-# STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 MEDIA_URL = '/media/'
 
-# STATICFILES_DIRS = (os.path.join('static'), )
 
 # simleui configs
 SIMPLEUI_CONFIG = {
     'system_keep': False,
-    # 'menu_display': ['指标刷新工具', '测试', '权限认证', '动态菜单测试'],      # 开启排序和过滤功能, 不填此字段为默认排序和全部显示, 空列表[] 为全部不显示.
-    'dynamic': True,  # 设置是否开启动态菜单, 默认为False. 如果开启, 则会在每次用户登陆时动态展示菜单内容
+    'dynamic': True,
     'menus': [{
         'name': 'QUICK SIM',
         'icon': 'fab fa-simplybuilt',
@@ -203,12 +197,10 @@ SIMPLEUI_CONFIG = {
         'models': [{
             'name': 'MONSTERS',
             'icon': "fas fa-pastafarianism",
-            # 'url': 'apps/simc/inxregularprogram/'
             'url': 'simc/monster/'
         }, {
             'name': 'CARDS',
             'icon': "fab fa-superpowers",
-            # 'url': 'apps/simc/inxregularprogram/'
             'url': 'simc/card/'
         }, {
             'name': 'CHARACTER',
@@ -230,6 +222,7 @@ SIMPLEUI_LOGO = 'https://miro.com/api/v1/accounts/3074457358670303205/picture?et
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ),
 }
 
