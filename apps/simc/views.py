@@ -1,8 +1,8 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import IsAuthenticated
 
-from django.shortcuts import render
 from django.core import serializers
 
 from .models import Card, Character, Monster, BattleField, User
@@ -22,13 +22,14 @@ class sealPagination(PageNumberPagination):
 
 
 class CharacterView(APIView):
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         try:
-            pg = sealPagination()
-            page_roles = pg.paginate_queryset(
-                queryset=Character.objects.filter(delete_flag=0), request=request, view=self)
-            data = json.loads(serializers.serialize("json", page_roles))
+            # pg = sealPagination()
+            # page_roles = pg.paginate_queryset(
+            #     queryset=Character.objects.filter(delete_flag=0), request=request, view=self)
+            # data = json.loads(serializers.serialize("json", page_roles))
             total = json.loads(serializers.serialize(
                 "json", Character.objects.filter(delete_flag=0)))
             response = {'code': 200, 'data': total,
@@ -41,13 +42,10 @@ class CharacterView(APIView):
 
 
 class CardView(APIView):
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         try:
-            pg = sealPagination()
-            page_roles = pg.paginate_queryset(
-                queryset=Card.objects.filter(delete_flag=0), request=request, view=self)
-            data = json.loads(serializers.serialize("json", page_roles))
             total = json.loads(serializers.serialize(
                 "json", Card.objects.filter(delete_flag=0)))
             response = {'code': 200, 'data': total,
@@ -60,13 +58,10 @@ class CardView(APIView):
 
 
 class MonsterView(APIView):
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         try:
-            pg = sealPagination()
-            page_roles = pg.paginate_queryset(
-                queryset=Monster.objects.filter(delete_flag=0), request=request, view=self)
-            data = json.loads(serializers.serialize("json", page_roles))
             total = json.loads(serializers.serialize(
                 "json", Monster.objects.filter(delete_flag=0)))
             response = {'code': 200, 'data': total,
@@ -79,16 +74,18 @@ class MonsterView(APIView):
 
 
 class BattleSimc(APIView):
+    permission_classes = (IsAuthenticated,)
 
     def post(self, request):
-        editor = self.request.user.id
+        editor = self.request.user
+        print(editor)
         received_json_data = json.loads(request.body)
         keys = ["name", "monsters", "character", "cards"]
         battle_data = {key: received_json_data.get(key) for key in keys}
         BattleField.objects.update_or_create(name=received_json_data.get('name'),
                                              summary=received_json_data.get(
-            'summary', ""), editor=editor
-        )
+                                                 'summary', ""), editor=editor
+                                             )
         battle_flow = BattleFlow(**battle_data)
         battle_flow.battle()
 
@@ -101,14 +98,10 @@ class BattleSimc(APIView):
 
 
 class BattleView(APIView):
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         try:
-            editor = self.request.user.id
-            pg = sealPagination()
-            page_roles = pg.paginate_queryset(
-                queryset=BattleField.objects.filter(delete_flag=0, editor=editor), request=request, view=self)
-            data = json.loads(serializers.serialize("json", page_roles))
             total = json.loads(serializers.serialize(
                 "json", BattleField.objects.filter(delete_flag=0)))
             response = {'code': 200, 'data': total,
@@ -121,13 +114,13 @@ class BattleView(APIView):
 
 
 class BattleIsExist(APIView):
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         try:
             name = request.GET['name']
             total = json.loads(serializers.serialize(
                 "json", BattleField.objects.filter(delete_flag=0, name=name)))
-            print(total)
             response = {'code': 200, 'data': total != [],
                         'msg': 'success'}
         except Exception as e:
