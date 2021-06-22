@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.pagination import PageNumberPagination
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from django.core import serializers
 
@@ -74,12 +74,11 @@ class MonsterView(APIView):
 
 
 class BattleSimc(APIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
 
     def post(self, request):
         editor = self.request.user
-        print(editor)
-        received_json_data = json.loads(request.body)
+        received_json_data = json.loads(list(dict(request.data).keys())[0])
         keys = ["name", "monsters", "character", "cards"]
         battle_data = {key: received_json_data.get(key) for key in keys}
         BattleField.objects.update_or_create(name=received_json_data.get('name'),
