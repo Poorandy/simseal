@@ -22,7 +22,7 @@ class sealPagination(PageNumberPagination):
 
 
 class CharacterView(APIView):
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         try:
@@ -42,7 +42,7 @@ class CharacterView(APIView):
 
 
 class CardView(APIView):
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         try:
@@ -58,7 +58,7 @@ class CardView(APIView):
 
 
 class MonsterView(APIView):
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         try:
@@ -74,7 +74,7 @@ class MonsterView(APIView):
 
 
 class BattleSimc(APIView):
-    permission_classes = (AllowAny,)
+    # permission_classes = (AllowAny,)
 
     def post(self, request):
         editor = self.request.user
@@ -97,7 +97,7 @@ class BattleSimc(APIView):
 
 
 class BattleView(APIView):
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         try:
@@ -113,7 +113,7 @@ class BattleView(APIView):
 
 
 class BattleIsExist(APIView):
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         try:
