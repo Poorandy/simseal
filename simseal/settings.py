@@ -196,19 +196,19 @@ SIMPLEUI_CONFIG = {
         'icon': 'fa fa-cogs',
         'models': [{
             'name': 'MONSTERS',
-            'icon': "fas fa-pastafarianism",
+            'icon': "fab fa-optin-monster",
             'url': 'simc/monster/'
         }, {
             'name': 'CARDS',
-            'icon': "fab fa-superpowers",
+            'icon': "fas fa-money-bill",
             'url': 'simc/card/'
         }, {
             'name': 'CHARACTER',
-            'icon': 'fas fa-grimace',
+            'icon': 'fas fa-hamsa',
             'url': 'simc/character/'
         }, {
-            'name': 'COMBAT',
-            'icon': 'fas fa-chess-knight',
+            'name': 'DUNGEON',
+            'icon': 'fas fa-dungeon',
             'url': 'simc/battlefield'
         }]
 
